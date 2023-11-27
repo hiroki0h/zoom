@@ -10,7 +10,10 @@ html(lang="en")
             h1 Home.pug !!
         main
             ul
-            form
+            form#nickname
+                input(type="text" placeholder="닉네임 적어주세요", required)
+                Button Save
+            form#message
                 input(type="text" placeholder="메세지를 적어주세요", required)
                 Button Send
         script(src="/public/js/app.js") 
