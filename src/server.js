@@ -20,9 +20,12 @@ const wss = new WebSocket.Server({ server }); // WebSocket server
 // http 위에 ws 입힘
 
 wss.on('connection', (socket) => {
-    socket.on('close', () => console.log('disconnected from browser'));
-    socket.send('hello');
-    socket.on('message', (message) => console.log(message.toString('utf8')));
     console.log('connected to browser');
+    socket.on('close', () => console.log('disconnected from browser'));
+    socket.on('message', (message) => {
+        const messageString = message.toString('utf8');
+        // or npm install ws@7.5.3 --save
+        socket.send(messageString);
+    });
 });
 server.listen(4000, handleListen);
