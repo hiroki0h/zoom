@@ -16,4 +16,7 @@ const handleListen = () => console.log(`Listening on http://localhost:4000`);
 const server = http.createServer(app); // http server 만들기
 const io = SocketIO(server);
 
+io.on('connection', (socket) => {
+    console.log(socket)
+})
 server.listen(4000, handleListen);
