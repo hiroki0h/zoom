@@ -21,13 +21,22 @@ const wss = new WebSocket.Server({ server }); // WebSocket server
 const sockets = [];
 wss.on('connection', (socket) => {
     sockets.push(socket);
+    // 익명일 경우
+    socket['nickname'] = 'Anon';
     console.log('connected to browser');
     socket.on('close', () => console.log('disconnected from browser'));
     socket.on('message', (message) => {
         const messageString = message.toString('utf8'); 
-        
         // or npm install ws@7.5.3 --save
-        sockets.forEach((aSocket) => aSocket.send(messageString));
+
+        const parsed = JSON.parse(message); // string => object 
+        switch(parsed.type){
+            case 'new_message' :
+            sockets.forEach((aSocket) => aSocket.send(`${socket.nickname}: ${parsed.payload}`));
+            case 'nickname' :
+                socket['nickname'] = parsed.payload;
+            break;
+        }
     });
 });
 server.listen(4000, handleListen);
