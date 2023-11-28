@@ -9,11 +9,6 @@ html(lang="en")
         header 
             h1 Home.pug !!
         main
-            ul
-            form#nickname
-                input(type="text" placeholder="닉네임 적어주세요", required)
-                Button Save
-            form#message
-                input(type="text" placeholder="메세지를 적어주세요", required)
-                Button Send
-        script(src="/public/js/app.js") 
+        
+        script(src="/socket.io/socket.io.js") 
+        script(src="/public/js/app.js")
